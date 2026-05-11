@@ -211,3 +211,80 @@
   background: #f8fafc;
   min-height: calc(100vh - 110px);
 }
+
+/* ── Tablet (≤ 1024px) ── */
+@media (max-width: 1024px) {
+  .navInner {
+    padding: 0.875rem 1.5rem;
+  }
+
+  .greeting {
+    display: none;
+  }
+
+  .categoryInner {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding: 0 1.5rem;
+  }
+
+  .categoryInner::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* ── Mobile (≤ 640px) ── */
+@media (max-width: 640px) {
+  .announcementBar {
+    font-size: 0.75rem;
+    padding: 0.4rem 0.75rem;
+  }
+
+  .navInner {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    padding: 0.625rem 1rem;
+    row-gap: 0.5rem;
+    column-gap: 0;
+  }
+
+  /* Row 1: logo left, actions right */
+  .logoLink {
+    order: 1;
+  }
+
+  .navRight {
+    order: 2;
+    margin-left: auto;
+    gap: 0.5rem;
+  }
+
+  /* Row 2: search full width */
+  .searchBox {
+    order: 3;
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+
+  .categoryInner {
+    padding: 0 1rem;
+  }
+
+  .pointsBadge {
+    font-size: 0.75rem;
+    padding: 0.3125rem 0.625rem;
+    gap: 0.25rem;
+  }
+
+  .cartBtn {
+    padding: 0.4375rem 0.75rem;
+    font-size: 0.8125rem;
+  }
+
+  .categoryLink,
+  .featuredLink {
+    font-size: 0.8125rem;
+    padding: 0.625rem 0.875rem;
+  }
+}
