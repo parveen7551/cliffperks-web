@@ -1,0 +1,466 @@
+.wrapper {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 2rem 2.5rem 5rem;
+}
+
+.subtitle {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.9375rem;
+  margin-bottom: 1.75rem;
+}
+
+/* ── Hero carousel ── */
+.heroSection {
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 0.875rem;
+}
+
+.heroSlide {
+  border-radius: 16px;
+  padding: 3rem 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  min-height: 230px;
+  position: relative;
+  overflow: hidden;
+}
+
+.heroSlide::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse at 80% 50%, rgba(255,255,255,0.06) 0%, transparent 60%);
+}
+
+.heroContent {
+  flex: 1;
+  position: relative;
+  z-index: 1;
+}
+
+.exclusiveBadge {
+  display: inline-block;
+  background: #ef4444;
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.75rem;
+  border-radius: 4px;
+  margin-bottom: 0.875rem;
+}
+
+.heroHeadline {
+  font-size: 1.875rem;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+  max-width: 400px;
+  margin: 0 0 0.625rem;
+}
+
+.heroSubtext {
+  color: rgba(255,255,255,0.65);
+  font-size: 0.9375rem;
+  margin: 0 0 1.5rem;
+}
+
+.heroCta {
+  background: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.6875rem 1.75rem;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s;
+  font-family: inherit;
+}
+
+.heroCta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+}
+
+.heroBrandBox {
+  width: 200px;
+  height: 140px;
+  background: rgba(255,255,255,0.12);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.18);
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.heroBrandName {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #fff;
+  text-align: center;
+  line-height: 1.3;
+}
+
+/* ── Carousel dots ── */
+.dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 2.75rem;
+}
+
+.dot {
+  width: 38px;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--border);
+  cursor: pointer;
+  border: none;
+  padding: 0;
+  transition: background 0.2s;
+}
+
+.dot.active {
+  background: var(--primary);
+}
+
+/* ── Featured section ── */
+.sectionHeading {
+  font-size: 1.3125rem;
+  font-weight: 700;
+  color: var(--foreground);
+  margin: 0 0 1.375rem;
+  letter-spacing: -0.015em;
+}
+
+.perksGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+}
+
+@media (max-width: 1100px) {
+  .perksGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .perksGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .heroSlide {
+    flex-direction: column;
+    padding: 2rem;
+    min-height: auto;
+  }
+
+  .heroBrandBox {
+    width: 100%;
+    height: 100px;
+  }
+}
+
+.perkCard {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+  text-decoration: none;
+  display: block;
+}
+
+.perkCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.09);
+  border-color: transparent;
+}
+
+.perkLogoArea {
+  height: 148px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.perkLogoText {
+  font-size: 1.125rem;
+  font-weight: 800;
+  text-align: center;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+}
+
+.perkInfo {
+  padding: 1rem 1.25rem 1.375rem;
+  border-top: 1px solid var(--border);
+}
+
+.perkBrand {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--foreground);
+  margin: 0 0 0.25rem;
+}
+
+.perkTagline {
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+  margin: 0 0 0.875rem;
+  line-height: 1.4;
+}
+
+.shopLink {
+  color: var(--primary);
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.shopLink:hover {
+  color: var(--primary-hover);
+}
+
+/* ── Trending section ── */
+.trendingSection {
+  margin-top: 3.5rem;
+}
+
+.centeredHeading {
+  font-size: 1.3125rem;
+  font-weight: 700;
+  color: var(--foreground);
+  text-align: center;
+  letter-spacing: -0.015em;
+  margin: 0 0 1.75rem;
+}
+
+.trendGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+@media (max-width: 900px) {
+  .trendGrid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 580px) {
+  .trendGrid { grid-template-columns: 1fr; }
+}
+
+.trendCard {
+  border-radius: 14px;
+  overflow: hidden;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  text-decoration: none;
+  display: block;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.trendCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 36px rgba(0,0,0,0.11);
+  border-color: transparent;
+}
+
+.trendImgArea {
+  height: 252px;
+  position: relative;
+  overflow: hidden;
+}
+
+.trendBrandOverlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  padding: 1.25rem 1.5rem;
+  background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 55%);
+}
+
+.trendBrandLabel {
+  font-size: 1.375rem;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -0.02em;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.35);
+}
+
+.trendBody {
+  padding: 1rem 1.25rem 1.25rem;
+  border-top: 1px solid var(--border);
+}
+
+.trendBrandName {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--foreground);
+  margin: 0 0 0.25rem;
+}
+
+.trendTagline {
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+  margin: 0 0 0.75rem;
+  line-height: 1.45;
+}
+
+.trendShopLink {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #f5941d;
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.trendShopLink:hover { color: #e8850c; }
+
+.seeMoreWrap {
+  display: flex;
+  justify-content: center;
+  margin-top: 0.25rem;
+}
+
+.seeMoreBtn {
+  background: transparent;
+  border: 1.5px solid var(--foreground);
+  border-radius: 8px;
+  color: var(--foreground);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  padding: 0.6875rem 2rem;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.15s, color 0.15s;
+}
+
+.seeMoreBtn:hover {
+  background: var(--foreground);
+  color: #fff;
+}
+
+/* ── Experiences carousel ── */
+.expSection {
+  margin-top: 3.5rem;
+}
+
+.expSlide {
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+  min-height: 290px;
+  display: flex;
+  align-items: stretch;
+  margin-bottom: 0.875rem;
+}
+
+.expBg {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  min-height: 290px;
+}
+
+.expPanel {
+  width: 310px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2.25rem 2rem;
+}
+
+.expExclusive {
+  font-size: 0.6875rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.65);
+  margin-bottom: 0.625rem;
+}
+
+.expHeadline {
+  font-size: 1.375rem;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  margin: 0 0 1.5rem;
+}
+
+.expCtaBtn {
+  background: #fff;
+  border: none;
+  border-radius: 7px;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  padding: 0.625rem 1.5rem;
+  cursor: pointer;
+  font-family: inherit;
+  width: fit-content;
+  margin-bottom: 1.25rem;
+  transition: opacity 0.15s, transform 0.15s;
+}
+
+.expCtaBtn:hover { opacity: 0.9; transform: translateY(-1px); }
+
+.expBrandName {
+  font-size: 1rem;
+  font-weight: 800;
+  color: rgba(255,255,255,0.9);
+  letter-spacing: 0.02em;
+}
+
+.expNote {
+  font-size: 0.6875rem;
+  color: rgba(255,255,255,0.4);
+  margin-top: 0.25rem;
+}
+
+.expDots {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.expDot {
+  width: 38px;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--border);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.expDot.active {
+  background: #f5941d;
+}
+
+@media (max-width: 768px) {
+  .expSlide { flex-direction: column; }
+  .expPanel { width: 100%; }
+  .expBg { min-height: 180px; }
+}
