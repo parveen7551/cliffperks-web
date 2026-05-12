@@ -48,7 +48,7 @@ const HERO_SLIDES = [
 const FEATURED_PERKS = [
   {
     brand: "GE Appliances",
-    tagline: "Save an additional 15%",
+    tagline: "Save an additional 25%",
     bgColor: "#f0f4ff",
     logo: 0,
   },
