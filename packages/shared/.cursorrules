@@ -1,23 +1,41 @@
 ## Project Architecture
-CliffPerks is a B2B2C web platform configured as a monorepo (Turborepo + pnpm).
-- **apps/web**: Next.js App Router providing Employer and Employee portals. Interfaces exclusively with the API.
-- **apps/api**: NestJS REST backend handling core logic, Auth0 JWT validation, and async chron jobs.
-- **packages/shared**: TypeScript / Zod resource bridging domains.
-- **Data Layer**: Drizzle ORM mapping to Neon Postgres, utilizing an Append-Only points ledger.
-- **Cache**: Railway Redis enforcing redemption limits and caching heavy aggregates.
 
-## This Repo's Role
-Provides static type constraints and schema utilities consumed throughout the monorepo bounds.
+CliffPerks is a B2B2C employee-perks platform for Canadian employers and their workforces.
+
+- **cliffperks-backend** (separate repo): Django 5 + DRF REST API. Django ORM → Neon Postgres. Railway Redis. Python 3.12. NOT NestJS. NOT Drizzle.
+- **cliffperks-web** (parent pnpm workspace): Next.js 16 App Router. React 19, TypeScript, TanStack Query.
+- **packages/shared** (this package): TypeScript + Zod DTOs. Single source of truth for API response types.
+- **Auth**: Backend issues SimpleJWT tokens. Auth0 installed in cliffperks-web but not yet wired.
+
+## This Package's Role
+
+Standalone, framework-neutral TypeScript library. Provides TypeScript interfaces and Zod validation schemas that mirror the `cliffperks-backend` DRF serializer output.
+
+**Current state (2026-05-16)**: Only `Employer` (3 fields) exported. Full type surface (Employee, Offer, Redemption, PointsLedger, Announcement, analytics) not yet modelled.
+
+Consumed by `cliffperks-web` as `@cliffperks/shared`. Zero upstream dependencies besides `zod`.
 
 ## Cross-Repo Dependencies
-- 0 dependencies Upstream. Feathers strictly down into all primary apps.
+
+- No upstream dependencies.
+- Consumed downstream by `cliffperks-web`.
+- Type definitions must mirror `cliffperks-backend` serializer output. Source of truth: `../../documentation/technical-architecture-api-reference.md` and `../../documentation/database-schema-documentation.md`.
 
 ## Coding Conventions
-- Maintain raw ES6/TS logic.
-- Structure exports clearly through the local `index.ts` bound barrel files to restrict obscure importing streams inside client apps.
 
-## Known Issues
-- Bare scaffolding currently existing inline with MVP needs.
+- TypeScript `strict: true`. No `any`.
+- Prefer Zod schemas as the primary definition; derive TS types with `z.infer<typeof Schema>`.
+- No Next.js, React, NestJS, or framework bindings — raw TypeScript only.
+- Export via `src/index.ts` barrel file. Consumers use `@cliffperks/shared` not deep paths.
+- CommonJS output (`"module": "CommonJS"`) for compatibility with Next.js and Node consumers.
+- Build with `pnpm build` (`tsc` → `dist/`).
+
+## Known Issues (audit 2026-05-16)
+
+- Only one interface exported (`Employer`, 3 fields) — the full API type surface is missing.
+- Current `employer.ts` is a plain TS interface, not a Zod schema — no runtime validation.
+- No tests, no test runner installed in this package.
 
 ## Testing State
-- Needs local Unit test suites verifying Zod transforms and parse constraints effectively.
+
+No test runner installed. Zero tests. Priority once Zod schemas are written: parse/validation tests for each schema — null/optional fields, UUID format, enum values matching backend `TextChoices`.

@@ -1,23 +1,44 @@
 ## Project Architecture
-CliffPerks is a B2B2C web platform configured as a monorepo (Turborepo + pnpm).
-- **apps/web**: Next.js App Router providing Employer and Employee portals. Interfaces exclusively with the API.
-- **apps/api**: NestJS REST backend handling core logic, Auth0 JWT validation, and async chron jobs.
-- **packages/shared**: TypeScript / Zod resource bridging domains.
-- **Data Layer**: Drizzle ORM mapping to Neon Postgres, utilizing an Append-Only points ledger.
-- **Cache**: Railway Redis enforcing redemption limits and caching heavy aggregates.
+
+CliffPerks is a B2B2C employee-perks platform for Canadian employers and their workforces.
+
+- **cliffperks-backend** (separate repo): Django 5 + DRF REST API. Django ORM → Neon Postgres. Railway Redis. Python 3.12. NOT NestJS. NOT Drizzle.
+- **cliffperks-web** (this pnpm workspace, NOT Turborepo): Next.js 16 App Router. React 19, TypeScript, TanStack Query, Auth0.
+- **packages/shared** (this workspace): TypeScript + Zod DTOs imported by the web app.
+- **Data layer**: Postgres behind the Django backend — this repo has NO direct database access.
+- **Auth**: Backend issues SimpleJWT tokens. Auth0 is installed here but NOT yet initialized — no `Auth0Provider` exists in the component tree.
 
 ## This Repo's Role
-This workspace acts entirely as the frontend interactive layer orchestrating B2B Employer admin dashboards and B2C employee reward feeds. 
+
+Presentation layer only. No database or Redis access. Connects to `cliffperks-backend` via HTTP REST for all data.
+
+**Current state (2026-05-16)**: UI shell built with static mock data. No live API calls. Auth0 not wired. `/auth/login` route referenced but not created.
 
 ## Cross-Repo Dependencies
-- Strictly consumes payloads generated natively by `apps/api`. No direct SQL or cache access is permitted. 
+
+- Calls `cliffperks-backend` REST API: `http://localhost:8000/api/v1/` (dev), TBD (prod).
+- All requests require `Authorization: Bearer <access_token>` (SimpleJWT, issued by backend).
+- Shared types from `@cliffperks/shared` (this workspace, `packages/shared`).
 
 ## Coding Conventions
-- Uses `React Query` context wrappers for robust client-side async logic caching. 
-- Rejects generic Tailwind configurations natively in favor of defined `glass` architecture mapped inside the root `.css` structures. 
 
-## Known Issues
-- Currently mapping mock generic UI pending distinct structural API ingestion tests.
+- **CSS**: Standard CSS variables + CSS Modules. Utility classes (`glass`, `card`, `grid`, `btn`, `text-muted`) in `globals.css`. No Tailwind — do not add it.
+- **TypeScript**: `strict: true`. No `any` types.
+- **React**: React 19 App Router. Server components by default; `'use client'` only for interactivity/hooks/browser APIs.
+- **Data fetching**: TanStack Query (`useQuery` / `useMutation`) for all API calls. `QueryClientProvider` is in `providers.tsx`.
+- **Package manager**: pnpm only (`pnpm install`, `pnpm dev`). Do not use npm or yarn.
+- **Next.js 16**: Has breaking changes vs prior versions. Read `node_modules/next/dist/docs/` before using Next.js-specific APIs.
+
+## Known Issues (audit 2026-05-16)
+
+- All page data is hardcoded (static mocks) — not connected to the backend API.
+- `/auth/login` linked from landing page but route does not exist.
+- Auth0 installed but no `Auth0Provider` — cannot use `useAuth0` anywhere.
+- `layout.tsx` has `title: "Create Next App"` boilerplate metadata.
+- No testing framework installed (no jest/vitest/playwright/cypress).
+- No error boundaries. No Sentry.
+- Three package managers coexist (npm lockfile + pnpm workspace + yarn error log) — use pnpm only.
 
 ## Testing State
-- Bare MVP, relying on simple dev-verification. E2E missing.
+
+No testing framework installed. Zero tests exist. Priority once API is wired: employer login flow, magic-link verify flow, offer redemption flow.
