@@ -17,8 +17,8 @@ export default function Home() {
           The modern perk platform for Canadian employees.
         </p>
         <div className={styles.ctas}>
-          <a href="/auth/login" className="btn" style={{ background: '#1E2B4A' }}>Employer Login</a>
-          <a href="/feed" className="btn" style={{ background: 'transparent', color: 'var(--foreground)', border: '1px solid var(--border)' }}>Employee Portal</a>
+          <a href="/login" className="btn" style={{ background: '#1E2B4A' }}>Employer Login</a>
+          <a href="/login" className="btn" style={{ background: 'transparent', color: 'var(--foreground)', border: '1px solid var(--border)' }}>Employee Portal</a>
         </div>
       </div>
     </div>

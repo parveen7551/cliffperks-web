@@ -1,0 +1,5 @@
+{
+  "//": "Sandbox typecheck remnant — safe to delete. The real type-check during local dev runs against ./tsconfig.json with a fresh `npm install`.",
+  "extends": "./tsconfig.json",
+  "include": []
+}
