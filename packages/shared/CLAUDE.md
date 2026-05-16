@@ -6,10 +6,10 @@ Last Updated: 2026-05-16
 
 | Resource | Path |
 |----------|------|
-| Platform overview | `../../documentation/README.md` |
-| API response shapes | `../../documentation/technical-architecture-api-reference.md` |
-| Database schema (source of truth for types) | `../../documentation/database-schema-documentation.md` |
-| Audit — code quality | `../../documentation/audit/code-quality-architecture.md` |
+| Platform overview | `../../../cliffperks-documentation/README.md` |
+| API response shapes | `../../../cliffperks-documentation/technical-architecture-api-reference.md` |
+| Database schema (source of truth for types) | `../../../cliffperks-documentation/database-schema-documentation.md` |
+| Audit — code quality | `../../../cliffperks-documentation/audit/code-quality-architecture.md` |
 
 ---
 
@@ -41,7 +41,7 @@ Does not import from Next.js, React, or any application framework. Logic must re
 
 - Depends on: nothing upstream. Zero external runtime dependencies except `zod`.
 - Consumed by: `cliffperks-web` (imported as `@cliffperks/shared`).
-- Source of truth for types: `../../documentation/database-schema-documentation.md` describes all backend models; `../../documentation/technical-architecture-api-reference.md` describes serializer output shapes.
+- Source of truth for types: `../../../cliffperks-documentation/database-schema-documentation.md` describes all backend models; `../../../cliffperks-documentation/technical-architecture-api-reference.md` describes serializer output shapes.
 
 ---
 

@@ -8,14 +8,14 @@ Last Updated: 2026-05-16
 
 | Resource | Path |
 |----------|------|
-| Platform overview + quick start | `../documentation/README.md` |
-| API endpoints + auth patterns | `../documentation/technical-architecture-api-reference.md` |
-| Database schema (all models) | `../documentation/database-schema-documentation.md` |
-| Local setup + env vars + runbook | `../documentation/infrastructure-operations-runbook.md` |
-| Audit — executive summary | `../documentation/audit/executive-summary-action-plan.md` |
-| Audit — code quality | `../documentation/audit/code-quality-architecture.md` |
-| Audit — security | `../documentation/audit/security-audit.md` |
-| Audit — testing | `../documentation/audit/testing-coverage.md` |
+| Platform overview + quick start | `../cliffperks-documentation/README.md` |
+| API endpoints + auth patterns | `../cliffperks-documentation/technical-architecture-api-reference.md` |
+| Database schema (all models) | `../cliffperks-documentation/database-schema-documentation.md` |
+| Local setup + env vars + runbook | `../cliffperks-documentation/infrastructure-operations-runbook.md` |
+| Audit — executive summary | `../cliffperks-documentation/audit/executive-summary-action-plan.md` |
+| Audit — code quality | `../cliffperks-documentation/audit/code-quality-architecture.md` |
+| Audit — security | `../cliffperks-documentation/audit/security-audit.md` |
+| Audit — testing | `../cliffperks-documentation/audit/testing-coverage.md` |
 
 ---
 
@@ -55,7 +55,7 @@ Presentation layer only. No database access. No direct Redis access. Connects to
 
 - Calls `cliffperks-backend` at `http://localhost:8000` (dev) / TBD (prod).
 - All requests must include `Authorization: Bearer <access_token>` from a SimpleJWT token issued by the backend.
-- API endpoint reference: `../documentation/technical-architecture-api-reference.md`.
+- API endpoint reference: `../cliffperks-documentation/technical-architecture-api-reference.md`.
 - Shared types: `@cliffperks/shared` (this workspace's `packages/shared`).
 
 ---
@@ -91,4 +91,4 @@ Conventions derived from what is actually in the codebase:
 
 - **Framework**: Not installed. No jest, vitest, playwright, or cypress in `package.json`.
 - **Test files**: Zero.
-- **Priority**: Once API calls are wired, add integration tests for the employer login flow, magic-link verify flow, and offer redemption flow. See `../documentation/audit/testing-coverage.md`.
+- **Priority**: Once API calls are wired, add integration tests for the employer login flow, magic-link verify flow, and offer redemption flow. See `../cliffperks-documentation/audit/testing-coverage.md`.
