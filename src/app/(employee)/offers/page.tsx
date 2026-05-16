@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { Suspense, useMemo, useState } from "react";
 import Link from "next/link";
 import { useQuery } from "@tanstack/react-query";
 import { useSearchParams } from "next/navigation";
@@ -27,6 +27,22 @@ const CATEGORIES: { value: "" | OfferCategory; label: string }[] = [
 ];
 
 export default function OffersPage() {
+  return (
+    <Suspense fallback={<OffersFallback />}>
+      <OffersContent />
+    </Suspense>
+  );
+}
+
+function OffersFallback() {
+  return (
+    <div style={{ maxWidth: 1320, margin: "0 auto", padding: "2rem 2.5rem 5rem" }}>
+      <p style={{ color: "var(--text-muted)" }}>Loading…</p>
+    </div>
+  );
+}
+
+function OffersContent() {
   const searchParams = useSearchParams();
   const [page, setPage] = useState(1);
   const [category, setCategory] = useState<"" | OfferCategory>(

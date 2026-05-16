@@ -3,7 +3,7 @@
 import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState, type FormEvent, type ReactNode } from "react";
 import Logo from "@/components/Logo";
 import { employeeApi } from "@/lib/api";
 import { qk } from "@/lib/queryKeys";
@@ -12,7 +12,23 @@ import styles from "./layout.module.css";
 
 const POINTS = new Intl.NumberFormat("en-CA");
 
-export default function EmployeeLayout({ children }: { children: React.ReactNode }) {
+function EmployeeLayoutFallback() {
+  return (
+    <div style={{ padding: "4rem", textAlign: "center", color: "var(--text-muted)" }}>
+      Loading…
+    </div>
+  );
+}
+
+export default function EmployeeLayout({ children }: { children: ReactNode }) {
+  return (
+    <Suspense fallback={<EmployeeLayoutFallback />}>
+      <EmployeeLayoutContent>{children}</EmployeeLayoutContent>
+    </Suspense>
+  );
+}
+
+function EmployeeLayoutContent({ children }: { children: ReactNode }) {
   const user = useRequireAuth("employee");
   const { logout } = useAuth();
   const router = useRouter();
@@ -39,7 +55,7 @@ export default function EmployeeLayout({ children }: { children: React.ReactNode
 
   const firstName = user.email.split("@")[0];
 
-  function onSearch(e: React.FormEvent) {
+  function onSearch(e: FormEvent) {
     e.preventDefault();
     const q = searchDraft.trim();
     router.push(q ? `/offers?search=${encodeURIComponent(q)}` : "/offers");

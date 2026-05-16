@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Logo from "@/components/Logo";
 import { useAuth } from "@/context/AuthContext";
@@ -14,6 +14,14 @@ type Status = "verifying" | "error";
  * (see apps.accounts.services.send_magic_link)
  */
 export default function VerifyPage() {
+  return (
+    <Suspense fallback={<VerifyShell />}>
+      <VerifyContent />
+    </Suspense>
+  );
+}
+
+function VerifyContent() {
   const params = useSearchParams();
   const router = useRouter();
   const { verifyEmployeeMagicLink } = useAuth();
@@ -45,6 +53,20 @@ export default function VerifyPage() {
       });
   }, [params, verifyEmployeeMagicLink]);
 
+  return (
+    <VerifyShell status={status} error={error} onRetry={() => router.replace("/login")} />
+  );
+}
+
+function VerifyShell({
+  status = "verifying",
+  error = null,
+  onRetry,
+}: {
+  status?: Status;
+  error?: string | null;
+  onRetry?: () => void;
+}) {
   return (
     <div
       style={{
@@ -88,7 +110,7 @@ export default function VerifyPage() {
               type="button"
               className="btn"
               style={{ background: "#1E2B4A", marginTop: "1rem" }}
-              onClick={() => router.replace("/login")}
+              onClick={onRetry}
             >
               Request a new link
             </button>
