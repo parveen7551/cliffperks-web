@@ -138,9 +138,9 @@ async function request<T>(path: string, opts: RequestOptions = {}): Promise<T> {
     headers,
     body,
     signal: opts.signal,
-    // Backend uses Authorization header — credentials not required, but
-    // including for parity with CORS_ALLOW_CREDENTIALS=True.
-    credentials: "include",
+    // The API uses bearer tokens, not cookies. Sending cookies can make DRF's
+    // session auth path enforce CSRF for cross-origin API calls.
+    credentials: "omit",
   };
 
   let res = await fetch(url, init);
