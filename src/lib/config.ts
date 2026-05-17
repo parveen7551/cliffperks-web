@@ -4,7 +4,9 @@
  */
 export const API_BASE_URL = (
   process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000"
-).replace(/\/+$/, "");
+)
+  .replace(/\/+$/, "")
+  .replace(/\/api$/, "");
 
 /** Versioned API prefix (matches config/urls.py `api/v1/`). */
 export const API_PREFIX = "/api/v1";
