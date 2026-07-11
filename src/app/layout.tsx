@@ -25,6 +25,7 @@ export const viewport: Viewport = {
 };
 
 import { Providers } from './providers';
+import Footer from '@/components/Footer';
 
 export default function RootLayout({
   children,
@@ -35,6 +36,7 @@ export default function RootLayout({
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
       <body>
         <Providers>{children}</Providers>
+        <Footer />
       </body>
     </html>
   );
