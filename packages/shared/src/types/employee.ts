@@ -18,10 +18,16 @@ export interface Employee {
   updated_at: ISODate;
 }
 
-/** Response shape from POST /employers/me/employees/import. */
+export interface EmployeeImportError {
+  line?: number;
+  email?: string;
+  error: string;
+}
+
+/** Response shape from POST /employers/me/employees. */
 export interface EmployeeImportResult {
   created: number;
   updated: number;
   skipped: number;
-  errors: string[];
+  errors: EmployeeImportError[];
 }

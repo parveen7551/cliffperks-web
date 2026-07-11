@@ -235,7 +235,7 @@ export const employerApi = {
   importEmployees(file: File): Promise<EmployeeImportResult> {
     const fd = new FormData();
     fd.append("file", file);
-    return request<EmployeeImportResult>("/employers/me/employees/import", {
+    return request<EmployeeImportResult>("/employers/me/employees", {
       method: "POST",
       formData: fd,
     });

@@ -120,7 +120,7 @@ export default function EmployeesPage() {
                   </summary>
                   <ul style={{ marginTop: "0.5rem" }}>
                     {importMutation.data.errors.map((err, i) => (
-                      <li key={i}>{err}</li>
+                      <li key={i}>{formatImportError(err)}</li>
                     ))}
                   </ul>
                 </details>
@@ -365,4 +365,13 @@ function pagerBtn(enabled: boolean): React.CSSProperties {
     opacity: enabled ? 1 : 0.5,
     color: "var(--foreground)",
   };
+}
+
+function formatImportError(err: { line?: number; email?: string; error: string }): string {
+  const prefix = [
+    err.line ? `Line ${err.line}` : null,
+    err.email || null,
+  ].filter(Boolean).join(" · ");
+
+  return prefix ? `${prefix}: ${err.error}` : err.error;
 }
