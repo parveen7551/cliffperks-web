@@ -13,13 +13,11 @@
 
 /* ── Hero carousel ── */
 .heroSection {
-  border-radius: 16px;
-  overflow: hidden;
   margin-bottom: 0.875rem;
 }
 
 .heroSlide {
-  border-radius: 16px;
+  background: linear-gradient(160deg, var(--color-neutral-900) 0%, var(--color-neutral-800) 100%);
   padding: 3rem 4rem;
   display: flex;
   align-items: center;
@@ -27,33 +25,22 @@
   gap: 2rem;
   min-height: 230px;
   position: relative;
-  overflow: hidden;
-}
-
-.heroSlide::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: radial-gradient(ellipse at 80% 50%, rgba(255,255,255,0.06) 0%, transparent 60%);
+  text-decoration: none;
 }
 
 .heroContent {
   flex: 1;
-  position: relative;
-  z-index: 1;
 }
 
 .exclusiveBadge {
   display: inline-block;
-  background: #ef4444;
+  background: var(--primary);
   color: #fff;
   font-size: 0.75rem;
   font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   padding: 0.25rem 0.75rem;
-  border-radius: 4px;
   margin-bottom: 0.875rem;
 }
 
@@ -68,41 +55,34 @@
 }
 
 .heroSubtext {
-  color: rgba(255,255,255,0.65);
+  color: rgba(255, 255, 255, 0.68);
   font-size: 0.9375rem;
   margin: 0 0 1.5rem;
 }
 
 .heroCta {
+  display: inline-block;
   background: #fff;
-  border: none;
-  border-radius: 8px;
-  padding: 0.6875rem 1.75rem;
+  padding: 0.7rem 1.75rem;
+  font-family: var(--font-heading);
   font-size: 0.9375rem;
-  font-weight: 700;
-  cursor: pointer;
-  transition: transform 0.15s, box-shadow 0.15s;
-  font-family: inherit;
+  font-weight: 800;
+  color: var(--color-neutral-900);
 }
 
-.heroCta:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+.heroSlide:hover .heroCta {
+  background: var(--color-neutral-200);
 }
 
 .heroBrandBox {
   width: 200px;
   height: 140px;
-  background: rgba(255,255,255,0.12);
-  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   display: flex;
   align-items: center;
   justify-content: center;
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(255,255,255,0.18);
   flex-shrink: 0;
-  position: relative;
-  z-index: 1;
 }
 
 .heroBrandName {
@@ -122,9 +102,8 @@
 }
 
 .dot {
-  width: 38px;
-  height: 4px;
-  border-radius: 2px;
+  width: 34px;
+  height: 3px;
   background: var(--border);
   cursor: pointer;
   border: none;
@@ -138,10 +117,10 @@
 
 /* ── Featured section ── */
 .sectionHeading {
-  font-size: 1.3125rem;
-  font-weight: 700;
+  font-size: 1.25rem;
+  font-weight: 800;
   color: var(--foreground);
-  margin: 0 0 1.375rem;
+  margin: 0 0 1.25rem;
   letter-spacing: -0.015em;
 }
 
@@ -176,19 +155,17 @@
 
 .perkCard {
   background: var(--card-bg);
-  border: 1px solid var(--border);
-  border-radius: 12px;
   overflow: hidden;
-  transition: transform 0.2s, box-shadow 0.2s;
   cursor: pointer;
   text-decoration: none;
   display: block;
+  color: inherit;
+  border: 1px solid transparent;
+  transition: border-color 0.15s;
 }
 
 .perkCard:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 32px rgba(0,0,0,0.09);
-  border-color: transparent;
+  border-color: var(--primary);
 }
 
 .perkLogoArea {
@@ -197,24 +174,17 @@
   align-items: center;
   justify-content: center;
   padding: 1.5rem;
-}
-
-.perkLogoText {
-  font-size: 1.125rem;
-  font-weight: 800;
-  text-align: center;
-  line-height: 1.3;
-  letter-spacing: -0.02em;
+  background: #fff;
+  border-bottom: 2px solid var(--border);
 }
 
 .perkInfo {
-  padding: 1rem 1.25rem 1.375rem;
-  border-top: 1px solid var(--border);
+  padding: 1rem 1.25rem 1.25rem;
 }
 
 .perkBrand {
   font-size: 0.9375rem;
-  font-weight: 700;
+  font-weight: 800;
   color: var(--foreground);
   margin: 0 0 0.25rem;
 }
@@ -222,20 +192,15 @@
 .perkTagline {
   font-size: 0.8125rem;
   color: var(--text-muted);
-  margin: 0 0 0.875rem;
+  margin: 0 0 0.75rem;
   line-height: 1.4;
 }
 
 .shopLink {
-  color: var(--primary);
+  color: var(--color-accent-700);
   font-size: 0.875rem;
-  font-weight: 600;
+  font-weight: 700;
   text-decoration: none;
-  transition: color 0.15s;
-}
-
-.shopLink:hover {
-  color: var(--primary-hover);
 }
 
 /* ── Trending section ── */
@@ -244,19 +209,19 @@
 }
 
 .centeredHeading {
-  font-size: 1.3125rem;
-  font-weight: 700;
+  font-size: 1.25rem;
+  font-weight: 800;
   color: var(--foreground);
   text-align: center;
   letter-spacing: -0.015em;
-  margin: 0 0 1.75rem;
+  margin: 0 0 1.5rem;
 }
 
 .trendGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1.5rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1.75rem;
 }
 
 @media (max-width: 900px) {
@@ -268,24 +233,21 @@
 }
 
 .trendCard {
-  border-radius: 14px;
-  overflow: hidden;
   background: var(--card-bg);
-  border: 1px solid var(--border);
   cursor: pointer;
   text-decoration: none;
   display: block;
-  transition: transform 0.2s, box-shadow 0.2s;
+  color: inherit;
+  border: 1px solid transparent;
+  transition: border-color 0.15s;
 }
 
 .trendCard:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 14px 36px rgba(0,0,0,0.11);
-  border-color: transparent;
+  border-color: var(--primary);
 }
 
 .trendImgArea {
-  height: 252px;
+  height: 240px;
   position: relative;
   overflow: hidden;
 }
@@ -296,25 +258,25 @@
   display: flex;
   align-items: flex-end;
   padding: 1.25rem 1.5rem;
-  background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 55%);
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.65) 0%, transparent 55%);
 }
 
 .trendBrandLabel {
-  font-size: 1.375rem;
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
   font-weight: 800;
   color: #fff;
   letter-spacing: -0.02em;
-  text-shadow: 0 2px 8px rgba(0,0,0,0.35);
 }
 
 .trendBody {
   padding: 1rem 1.25rem 1.25rem;
-  border-top: 1px solid var(--border);
+  border-top: 2px solid var(--border);
 }
 
 .trendBrandName {
   font-size: 0.9375rem;
-  font-weight: 700;
+  font-weight: 800;
   color: var(--foreground);
   margin: 0 0 0.25rem;
 }
@@ -328,36 +290,33 @@
 
 .trendShopLink {
   font-size: 0.875rem;
-  font-weight: 600;
-  color: #f5941d;
+  font-weight: 700;
+  color: var(--color-accent-700);
   text-decoration: none;
-  transition: color 0.15s;
 }
-
-.trendShopLink:hover { color: #e8850c; }
 
 .seeMoreWrap {
   display: flex;
   justify-content: center;
-  margin-top: 0.25rem;
+  margin-top: 0.5rem;
 }
 
 .seeMoreBtn {
+  display: inline-flex;
   background: transparent;
-  border: 1.5px solid var(--foreground);
-  border-radius: 8px;
+  border: 1px solid var(--border);
   color: var(--foreground);
+  font-family: var(--font-heading);
   font-size: 0.9375rem;
-  font-weight: 600;
+  font-weight: 800;
   padding: 0.6875rem 2rem;
   cursor: pointer;
-  font-family: inherit;
-  transition: background 0.15s, color 0.15s;
+  text-decoration: none;
+  transition: background 0.15s;
 }
 
 .seeMoreBtn:hover {
-  background: var(--foreground);
-  color: #fff;
+  background: color-mix(in srgb, var(--foreground) 7%, transparent);
 }
 
 /* ── Experiences carousel ── */
@@ -366,10 +325,8 @@
 }
 
 .expSlide {
-  border-radius: 16px;
-  overflow: hidden;
   position: relative;
-  min-height: 290px;
+  min-height: 280px;
   display: flex;
   align-items: stretch;
   margin-bottom: 0.875rem;
@@ -379,7 +336,7 @@
   flex: 1;
   position: relative;
   overflow: hidden;
-  min-height: 290px;
+  min-height: 280px;
 }
 
 .expPanel {
@@ -396,7 +353,7 @@
   font-weight: 800;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.65);
+  color: rgba(255, 255, 255, 0.75);
   margin-bottom: 0.625rem;
 }
 
@@ -410,31 +367,31 @@
 }
 
 .expCtaBtn {
+  display: inline-block;
   background: #fff;
-  border: none;
-  border-radius: 7px;
+  font-family: var(--font-heading);
   font-size: 0.9375rem;
-  font-weight: 700;
-  padding: 0.625rem 1.5rem;
-  cursor: pointer;
-  font-family: inherit;
+  font-weight: 800;
+  padding: 0.65rem 1.5rem;
   width: fit-content;
   margin-bottom: 1.25rem;
-  transition: opacity 0.15s, transform 0.15s;
+  text-decoration: none;
 }
 
-.expCtaBtn:hover { opacity: 0.9; transform: translateY(-1px); }
+.expCtaBtn:hover {
+  background: var(--color-neutral-200);
+}
 
 .expBrandName {
   font-size: 1rem;
   font-weight: 800;
-  color: rgba(255,255,255,0.9);
+  color: rgba(255, 255, 255, 0.92);
   letter-spacing: 0.02em;
 }
 
 .expNote {
   font-size: 0.6875rem;
-  color: rgba(255,255,255,0.4);
+  color: rgba(255, 255, 255, 0.55);
   margin-top: 0.25rem;
 }
 
@@ -445,9 +402,8 @@
 }
 
 .expDot {
-  width: 38px;
-  height: 4px;
-  border-radius: 2px;
+  width: 34px;
+  height: 3px;
   background: var(--border);
   border: none;
   padding: 0;
@@ -456,7 +412,7 @@
 }
 
 .expDot.active {
-  background: #f5941d;
+  background: var(--primary);
 }
 
 @media (max-width: 768px) {
@@ -501,7 +457,7 @@
 
   .dot,
   .expDot {
-    width: 28px;
+    width: 26px;
   }
 
   .dots {

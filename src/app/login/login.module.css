@@ -10,7 +10,6 @@
   width: 100%;
   max-width: 460px;
   padding: 2.5rem;
-  border-radius: 20px;
 }
 
 .brand {
@@ -36,10 +35,7 @@
 .tabs {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 0.25rem;
-  padding: 0.25rem;
-  background: var(--border);
-  border-radius: 12px;
+  border: 1px solid var(--border);
   margin-bottom: 1.5rem;
 }
 
@@ -47,17 +43,20 @@
   background: transparent;
   border: none;
   padding: 0.625rem;
-  font-weight: 600;
-  border-radius: 8px;
+  font-weight: 800;
+  font-family: var(--font-heading);
   cursor: pointer;
   color: var(--text-muted);
-  font-family: inherit;
+  font-size: 0.875rem;
+}
+
+.tab + .tab {
+  border-left: 1px solid var(--border);
 }
 
 .tabActive {
-  background: var(--card-bg);
-  color: var(--foreground);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  background: var(--primary);
+  color: #fff;
 }
 
 .form {
@@ -77,24 +76,21 @@
 .input {
   width: 100%;
   padding: 0.65rem 0.875rem;
-  border-radius: 8px;
   border: 1px solid var(--border);
   background: var(--card-bg);
   color: var(--foreground);
   font-size: 0.9375rem;
   font-family: inherit;
-  transition: border-color 0.15s, box-shadow 0.15s;
+  transition: border-color 0.15s;
 }
 
-.input:focus {
+.input:focus-visible {
   outline: none;
   border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
 }
 
 .submit {
   margin-top: 0.5rem;
-  background: #1e2b4a;
 }
 
 .hint {
@@ -106,17 +102,15 @@
 
 .error {
   font-size: 0.875rem;
-  color: #b91c1c;
-  background: rgba(220, 38, 38, 0.08);
-  border: 1px solid rgba(220, 38, 38, 0.25);
-  border-radius: 8px;
+  color: var(--color-accent-700);
+  background: var(--color-accent-100);
+  border-left: 2px solid var(--primary);
   padding: 0.625rem 0.875rem;
 }
 
 .notice {
-  background: rgba(34, 197, 94, 0.08);
-  border: 1px solid rgba(34, 197, 94, 0.25);
-  border-radius: 10px;
+  background: var(--card-bg);
+  border-left: 2px solid var(--primary);
   padding: 1rem 1.125rem;
   font-size: 0.9375rem;
   display: flex;
@@ -134,7 +128,7 @@
   background: none;
   border: none;
   color: var(--primary);
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
   padding: 0;
   font-family: inherit;

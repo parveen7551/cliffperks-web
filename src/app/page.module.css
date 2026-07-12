@@ -1,97 +1,164 @@
-.page {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
+:root {
+  --leading: 28px;
+  --edge: clamp(20px, 5vw, 72px);
 }
 
-.card {
-  padding: 4rem;
-  border-radius: 24px;
-  max-width: 800px;
-  width: 100%;
-  margin: 2rem;
+.wrap {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 var(--edge);
 }
 
-.brand {
+/* ── nav ── */
+.nav {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 0.75rem;
-  margin-bottom: 1.5rem;
+  gap: var(--space-4, 16px);
+  padding: 0.9rem var(--edge);
+  padding-inline: max(var(--edge), calc((100% - 1100px) / 2 + var(--edge)));
+  border-bottom: 2px solid var(--border);
+}
+
+.brandmark {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  margin-right: auto;
+  text-decoration: none;
 }
 
 .brandName {
-  font-size: 2.25rem;
+  font-family: var(--font-heading);
   font-weight: 800;
-  letter-spacing: -0.04em;
+  font-size: 18px;
+  letter-spacing: -0.02em;
+  color: var(--foreground);
+}
+
+.brandAccent {
+  color: #f5941d;
+}
+
+.navLink {
+  color: var(--foreground);
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.navLink:hover {
+  color: var(--primary);
+}
+
+/* ── hero ── */
+.hero {
+  padding: calc(4.5 * var(--leading)) 0 calc(3.5 * var(--leading));
+}
+
+.kicker {
+  display: block;
+  font-size: 13px;
   line-height: 1;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-accent-700);
+  margin: 0 0 var(--space-4, 16px);
 }
 
-.tagline {
-  font-size: 1.25rem;
-  color: var(--text-muted);
-  margin: 0 0 3rem;
+.display {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: clamp(40px, 6vw, 76px);
+  line-height: 1.04;
+  letter-spacing: -0.02em;
+  margin: 0 0 var(--space-6, 24px);
+  max-width: 16ch;
 }
 
-.ctas {
+.displayAccent {
+  color: var(--primary);
+}
+
+.sub {
+  font-size: 18px;
+  line-height: var(--leading);
+  max-width: 46ch;
+  margin: 0 0 calc(1.5 * var(--leading));
+  color: color-mix(in srgb, var(--foreground) 78%, transparent);
+}
+
+.row {
   display: flex;
-  gap: 1rem;
-  justify-content: center;
+  gap: var(--space-3, 12px);
   flex-wrap: wrap;
 }
 
-/* ── Tablet (≤ 768px) ── */
-@media (max-width: 768px) {
-  .card {
-    padding: 2.5rem 2rem;
-    margin: 1.5rem;
-  }
-
-  .tagline {
-    font-size: 1.125rem;
-    margin-bottom: 2rem;
-  }
+.row a {
+  font-size: 15px;
+  padding: 0.85rem 1.75rem;
 }
 
-/* ── Mobile (≤ 640px) ── */
-@media (max-width: 640px) {
-  .card {
-    padding: 2rem 1.5rem;
-    margin: 1rem;
-    border-radius: 16px;
-  }
-
-  .brandName {
-    font-size: 1.875rem;
-  }
-
-  .tagline {
-    font-size: 1rem;
-    margin-bottom: 1.75rem;
-  }
-
-  .ctas {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .ctas a {
-    justify-content: center;
-    text-align: center;
-  }
+.btnSecondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border);
+  color: var(--foreground);
+  background: transparent;
+  text-decoration: none;
+  font-family: var(--font-heading);
+  font-weight: 800;
 }
 
-/* ── Small Mobile (≤ 400px) ── */
-@media (max-width: 400px) {
-  .card {
-    padding: 1.5rem 1.25rem;
-    margin: 0.75rem;
+.btnSecondary:hover {
+  background: color-mix(in srgb, var(--foreground) 7%, transparent);
+}
+
+/* ── stats ── */
+.stats {
+  padding: calc(2 * var(--leading)) 0;
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  justify-content: space-between;
+  gap: var(--leading);
+}
+
+.statNum {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: clamp(30px, 3vw, 42px);
+  line-height: 1.1;
+  color: var(--primary);
+  margin: 0;
+}
+
+.statLabel {
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--foreground) 65%, transparent);
+  margin: var(--space-2, 8px) 0 0;
+}
+
+/* ── footer ── */
+.pageFooter {
+  padding: calc(2 * var(--leading)) 0;
+  font-size: 13px;
+  color: color-mix(in srgb, var(--foreground) 60%, transparent);
+}
+
+@media (max-width: 720px) {
+  .hero {
+    padding: calc(2.5 * var(--leading)) 0 calc(2 * var(--leading));
   }
 
-  .brandName {
-    font-size: 1.625rem;
+  .statsGrid {
+    grid-template-columns: repeat(1, auto);
+  }
+
+  .navLink {
+    display: none;
   }
 }

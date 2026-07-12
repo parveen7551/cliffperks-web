@@ -81,7 +81,6 @@ function VerifyShell({
         className="glass"
         style={{
           padding: "2.5rem",
-          borderRadius: 20,
           maxWidth: 420,
           width: "100%",
           textAlign: "center",
@@ -109,7 +108,7 @@ function VerifyShell({
             <button
               type="button"
               className="btn"
-              style={{ background: "#1E2B4A", marginTop: "1rem" }}
+              style={{ marginTop: "1rem" }}
               onClick={onRetry}
             >
               Request a new link

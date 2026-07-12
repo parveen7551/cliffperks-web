@@ -89,7 +89,6 @@ export default function EmployeesPage() {
           <button
             type="button"
             className="btn"
-            style={{ background: "#1E2B4A" }}
             disabled={importMutation.isPending}
             onClick={() => fileInput.current?.click()}
           >
@@ -171,7 +170,6 @@ export default function EmployeesPage() {
             flex: "1 1 240px",
             padding: "0.55rem 0.75rem",
             border: "1px solid var(--border)",
-            borderRadius: 8,
             background: "var(--card-bg)",
             color: "var(--foreground)",
           }}
@@ -185,7 +183,6 @@ export default function EmployeesPage() {
           style={{
             padding: "0.55rem 0.75rem",
             border: "1px solid var(--border)",
-            borderRadius: 8,
             background: "var(--card-bg)",
             color: "var(--foreground)",
           }}
@@ -248,9 +245,9 @@ export default function EmployeesPage() {
                           style={{
                             display: "inline-block",
                             padding: "0.125rem 0.5rem",
-                            borderRadius: 999,
                             fontSize: "0.75rem",
-                            fontWeight: 600,
+                            fontWeight: 700,
+                            letterSpacing: "0.02em",
                             color: "#fff",
                             background: STATUS_COLOR[emp.status],
                           }}
@@ -272,7 +269,6 @@ export default function EmployeesPage() {
                               background: "none",
                               border: "1px solid var(--border)",
                               padding: "0.3125rem 0.625rem",
-                              borderRadius: 6,
                               cursor: "pointer",
                               color: "var(--text-muted)",
                               fontSize: "0.8125rem",
@@ -360,7 +356,6 @@ function pagerBtn(enabled: boolean): React.CSSProperties {
     padding: "0.375rem 0.75rem",
     background: "var(--card-bg)",
     border: "1px solid var(--border)",
-    borderRadius: 6,
     cursor: enabled ? "pointer" : "not-allowed",
     opacity: enabled ? 1 : 0.5,
     color: "var(--foreground)",

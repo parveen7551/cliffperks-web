@@ -12,6 +12,7 @@ import {
 } from "recharts";
 import { employerApi } from "@/lib/api";
 import { qk } from "@/lib/queryKeys";
+import styles from "./dashboard.module.css";
 
 const CAD = new Intl.NumberFormat("en-CA", {
   style: "currency",
@@ -40,13 +41,13 @@ export default function DashboardPage() {
   });
 
   if (analytics.isLoading) {
-    return <p style={{ color: "var(--text-muted)" }}>Loading dashboard…</p>;
+    return <p className={styles.emptyNote}>Loading dashboard…</p>;
   }
   if (analytics.isError) {
     return (
-      <div className="card" style={{ borderColor: "rgba(220,38,38,0.4)" }}>
+      <div className={styles.errorPanel}>
         <h3 style={{ marginTop: 0 }}>Couldn&rsquo;t load analytics</h3>
-        <p style={{ color: "var(--text-muted)" }}>
+        <p className={styles.emptyNote}>
           {analytics.error instanceof Error ? analytics.error.message : "Unknown error."}
         </p>
       </div>
@@ -58,13 +59,13 @@ export default function DashboardPage() {
 
   return (
     <div>
-      <h1 style={{ marginBottom: "2rem", fontSize: "2rem" }}>Analytics Dashboard</h1>
+      <h1 className={styles.pageTitle}>Analytics Dashboard</h1>
 
-      <div className="grid" style={{ marginBottom: "2rem" }}>
+      <div className={styles.statGrid}>
         <StatCard
           label="Total Employees"
           value={NUM.format(data.total_enrolled_employees)}
-          color="var(--primary)"
+          accent
         />
         <StatCard
           label="Monthly Active Users"
@@ -77,21 +78,21 @@ export default function DashboardPage() {
         <StatCard
           label="Estimated Savings (YTD)"
           value={CAD.format(data.estimated_savings_cad)}
-          color="#10b981"
         />
       </div>
 
-      <div className="card" style={{ marginBottom: "2rem" }}>
-        <h3 style={{ marginTop: 0, marginBottom: "1rem" }}>Daily Redemptions (last 30 days)</h3>
+      <div className={styles.panel}>
+        <h3>Daily Redemptions (last 30 days)</h3>
         {data.daily_trend.length === 0 ? (
-          <p style={{ color: "var(--text-muted)" }}>
-            No redemptions yet — once employees start using their perks, you&rsquo;ll see the trend here.
+          <p className={styles.emptyNote}>
+            No redemptions yet — once employees start using their perks, you&rsquo;ll see the
+            trend here.
           </p>
         ) : (
           <div style={{ width: "100%", height: 260 }}>
             <ResponsiveContainer>
               <LineChart data={data.daily_trend} margin={{ top: 10, right: 16, bottom: 0, left: 0 }}>
-                <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" />
+                <CartesianGrid strokeDasharray="0" stroke="var(--border)" />
                 <XAxis dataKey="date" tick={{ fontSize: 12 }} stroke="var(--text-muted)" />
                 <YAxis allowDecimals={false} tick={{ fontSize: 12 }} stroke="var(--text-muted)" />
                 <Tooltip />
@@ -109,43 +110,23 @@ export default function DashboardPage() {
         )}
       </div>
 
-      <div className="card">
-        <h3 style={{ marginTop: 0, marginBottom: "1rem" }}>Top Categories</h3>
+      <div className={styles.panel}>
+        <h3>Top Categories</h3>
         {data.top_categories.length === 0 ? (
-          <p style={{ color: "var(--text-muted)" }}>No redemption data yet.</p>
+          <p className={styles.emptyNote}>No redemption data yet.</p>
         ) : (
-          <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "0.625rem" }}>
+          <ul className={styles.categoryRow}>
             {data.top_categories.map((row) => {
               const max = data.top_categories[0]?.count || 1;
               const pct = (row.count / max) * 100;
               return (
                 <li key={row.category}>
-                  <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      fontSize: "0.875rem",
-                      marginBottom: 4,
-                    }}
-                  >
+                  <div className={styles.categoryHead}>
                     <span>{CATEGORY_LABEL[row.category] ?? row.category}</span>
-                    <span style={{ color: "var(--text-muted)" }}>{NUM.format(row.count)}</span>
+                    <span className={styles.emptyNote}>{NUM.format(row.count)}</span>
                   </div>
-                  <div
-                    style={{
-                      height: 8,
-                      background: "var(--border)",
-                      borderRadius: 4,
-                      overflow: "hidden",
-                    }}
-                  >
-                    <div
-                      style={{
-                        width: `${pct}%`,
-                        height: "100%",
-                        background: "var(--primary)",
-                      }}
-                    />
+                  <div className={styles.categoryTrack}>
+                    <div className={styles.categoryFill} style={{ width: `${pct}%` }} />
                   </div>
                 </li>
               );
@@ -160,16 +141,16 @@ export default function DashboardPage() {
 function StatCard({
   label,
   value,
-  color,
+  accent,
 }: {
   label: string;
   value: string;
-  color?: string;
+  accent?: boolean;
 }) {
   return (
-    <div className="card" style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
-      <span className="text-muted">{label}</span>
-      <strong style={{ fontSize: "2.25rem", color: color ?? "var(--foreground)" }}>{value}</strong>
+    <div className={styles.statCard}>
+      <div className={styles.label}>{label}</div>
+      <div className={`${styles.value}${accent ? ` ${styles.accent}` : ""}`}>{value}</div>
     </div>
   );
 }

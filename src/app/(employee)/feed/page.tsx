@@ -8,7 +8,6 @@ import { employeeApi } from "@/lib/api";
 import { qk } from "@/lib/queryKeys";
 import {
   discountLabel,
-  offerSoftTint,
   offerTheme,
   offerTitle,
 } from "@/lib/offerDisplay";
@@ -72,10 +71,7 @@ export default function FeedPage() {
                 href={`/offers/${offer.id}`}
                 className={styles.perkCard}
               >
-                <div
-                  className={styles.perkLogoArea}
-                  style={{ background: offerSoftTint(offer) }}
-                >
+                <div className={styles.perkLogoArea}>
                   {offer.partner.logo_url ? (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img

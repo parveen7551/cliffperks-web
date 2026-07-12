@@ -2,7 +2,9 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import Logo from "@/components/Logo";
 import { useAuth, useRequireAuth } from "@/context/AuthContext";
+import styles from "./layout.module.css";
 
 const NAV = [
   { href: "/dashboard", label: "Dashboard" },
@@ -30,47 +32,30 @@ export default function EmployerLayout({
 
   return (
     <>
-      <header className="header-nav glass" style={{ borderBottomColor: "var(--primary)" }}>
-        <h1>
-          CliffPerks{" "}
-          <span style={{ fontWeight: "normal", color: "var(--text-muted)", fontSize: "1rem" }}>
-            Employer Portal
+      <header className={styles.headerNav}>
+        <Link href="/dashboard" className={styles.brandmark}>
+          <Logo height={28} />
+          <span className={styles.brandName}>
+            Cliff<span className={styles.brandAccent}>Perks</span>
           </span>
-        </h1>
-        <nav className="nav-links">
-          {NAV.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              style={{
-                color:
-                  pathname?.startsWith(item.href)
-                    ? "var(--foreground)"
-                    : "var(--text-muted)",
-                fontWeight: pathname?.startsWith(item.href) ? 700 : 500,
-              }}
-            >
-              {item.label}
-            </Link>
-          ))}
-          <span
-            style={{
-              fontSize: "0.8125rem",
-              color: "var(--text-muted)",
-              marginLeft: "0.5rem",
-            }}
+        </Link>
+        <span className={styles.portalLabel}>Employer Portal</span>
+        {NAV.map((item) => (
+          <Link
+            key={item.href}
+            href={item.href}
+            aria-current={pathname?.startsWith(item.href) ? "page" : undefined}
+            className={`${styles.navLink}${
+              pathname?.startsWith(item.href) ? ` ${styles.navLinkActive}` : ""
+            }`}
           >
-            {user.email}
-          </span>
-          <button
-            type="button"
-            className="btn"
-            style={{ padding: "0.5rem 1rem", fontSize: "0.875rem", background: "#333" }}
-            onClick={logout}
-          >
-            Logout
-          </button>
-        </nav>
+            {item.label}
+          </Link>
+        ))}
+        <span className={styles.email}>{user.email}</span>
+        <button type="button" className={styles.logoutBtn} onClick={logout}>
+          Logout
+        </button>
       </header>
       <main className="container">{children}</main>
     </>

@@ -1,35 +1,70 @@
+/*
+ * CliffPerks — "Modernist" design tokens.
+ * Flat, architectural, set in Archivo: a near-mono red on a light ground,
+ * a visible grid, zero corner radius and strong 2px rules. Retune the look
+ * here — every page reads from these variables.
+ */
 *, *::before, *::after {
   box-sizing: border-box;
 }
 
 :root {
-  --background: #f8fafc;
-  --foreground: #0f172a;
-  --primary: #4f46e5;
-  --primary-hover: #4338ca;
-  --card-bg: #ffffff;
-  --border: #e2e8f0;
-  --text-muted: #64748b;
-  --glass-bg: rgba(255, 255, 255, 0.7);
-}
+  --background: #f3f2f2;
+  --foreground: #201e1d;
+  --primary: #ec3013;
+  --primary-hover: #dd2b0f;
+  --primary-active: #ae1800;
+  --card-bg: #eae9e9;
+  --border: color-mix(in srgb, #201e1d 40%, transparent);
+  --text-muted: color-mix(in srgb, #201e1d 55%, transparent);
+  --glass-bg: #eae9e9;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #020617;
-    --foreground: #f8fafc;
-    --primary: #6366f1;
-    --primary-hover: #818cf8;
-    --card-bg: #0f172a;
-    --border: #1e293b;
-    --text-muted: #94a3b8;
-    --glass-bg: rgba(15, 23, 42, 0.7);
-  }
+  /* Tonal ramps — same shared lightness scale, so equivalent steps read
+     with the same visual weight. */
+  --color-neutral-100: #f8f4f4;
+  --color-neutral-200: #eae7e7;
+  --color-neutral-300: #d7d3d3;
+  --color-neutral-400: #bab6b6;
+  --color-neutral-500: #9b9797;
+  --color-neutral-600: #7d7979;
+  --color-neutral-700: #605d5d;
+  --color-neutral-800: #444141;
+  --color-neutral-900: #2d2b2b;
+
+  --color-accent-100: #fff2ef;
+  --color-accent-200: #ffe0d9;
+  --color-accent-300: #ffc4b8;
+  --color-accent-400: #ff9783;
+  --color-accent-500: #ff563c;
+  --color-accent-600: #dd2b0f;
+  --color-accent-700: #ae1800;
+  --color-accent-800: #7c1405;
+  --color-accent-900: #4d170e;
+
+  --font-heading: var(--font-archivo), "Archivo", system-ui, sans-serif;
+  --font-heading-weight: 800;
+  --font-body: var(--font-archivo), "Archivo", system-ui, sans-serif;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+
+  --shadow-sm: 0 1px 2px color-mix(in srgb, #2d2b2b 14%, transparent);
+  --shadow-md: 0 3px 10px color-mix(in srgb, #2d2b2b 16%, transparent);
+  --shadow-lg: 0 12px 32px color-mix(in srgb, #2d2b2b 22%, transparent);
 }
 
 body {
   background-color: var(--background);
   color: var(--foreground);
-  font-family: var(--font-geist-sans), sans-serif;
+  font-family: var(--font-body);
   margin: 0;
   padding: 0;
   min-height: 100vh;
@@ -37,12 +72,26 @@ body {
   text-size-adjust: 100%;
 }
 
-/* Glassmorphism primitives */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: var(--font-heading-weight);
+  line-height: 1.12;
+  letter-spacing: -0.015em;
+  margin: 0 0 var(--space-2);
+}
+
+a { color: var(--primary); text-underline-offset: 3px; }
+img { display: block; max-width: 100%; }
+
+:focus { outline: none; }
+:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+::selection { background: color-mix(in srgb, var(--primary) 30%, transparent); }
+
+/* Glassmorphism is gone — .glass is now a flat surface-filled panel,
+   kept for backwards compatibility with existing markup. */
 .glass {
   background: var(--glass-bg);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid var(--border);
+  border: none;
 }
 
 /* Utility classes */
@@ -59,33 +108,41 @@ body {
 }
 
 .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
   background-color: var(--primary);
   color: #fff;
-  border: none;
-  border-radius: 8px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
   padding: 0.75rem 1.5rem;
-  font-size: 1rem;
-  font-weight: 600;
+  font-family: var(--font-heading);
+  font-size: 0.9375rem;
+  font-weight: var(--font-heading-weight);
   cursor: pointer;
-  transition: all 0.2s ease-in-out;
+  text-decoration: none;
+  transition: background-color 0.15s ease;
 }
 
 .btn:hover {
   background-color: var(--primary-hover);
-  transform: translateY(-1px);
+}
+
+.btn:active {
+  background-color: var(--primary-active);
+}
+
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
 }
 
 .card {
   background-color: var(--card-bg);
-  border: 1px solid var(--border);
-  border-radius: 12px;
+  border: none;
+  border-radius: var(--radius-md);
   padding: 1.5rem;
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
 }
 
 .grid {
@@ -107,19 +164,38 @@ body {
   }
 }
 
+/* — small components shared across pages — */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.6875rem;
+  letter-spacing: 0.02em;
+  padding: 3px 10px;
+  border-radius: var(--radius-sm);
+  font-weight: 700;
+}
+
+.hr {
+  height: 2px;
+  border: 0;
+  margin: var(--space-4) 0;
+  background: var(--border);
+}
+
 .header-nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
-  border-bottom: 1px solid var(--border);
+  border-bottom: 2px solid var(--border);
   position: sticky;
   top: 0;
   z-index: 100;
+  background: var(--background);
 }
 
 .header-nav h1 {
-  color: var(--primary);
+  color: var(--foreground);
   font-size: 1.5rem;
   font-weight: 800;
   letter-spacing: -0.025em;
@@ -134,7 +210,7 @@ body {
 .nav-links a {
   color: var(--text-muted);
   text-decoration: none;
-  font-weight: 500;
+  font-weight: 600;
   transition: color 0.2s;
 }
 

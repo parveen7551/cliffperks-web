@@ -52,7 +52,6 @@ export default function AnnouncementsPage() {
         <button
           type="button"
           className="btn"
-          style={{ background: "#1E2B4A" }}
           onClick={() => setShowForm((v) => !v)}
         >
           {showForm ? "Cancel" : "New announcement"}
@@ -185,7 +184,6 @@ const inputStyle: React.CSSProperties = {
   width: "100%",
   padding: "0.55rem 0.75rem",
   border: "1px solid var(--border)",
-  borderRadius: 8,
   background: "var(--card-bg)",
   color: "var(--foreground)",
   fontFamily: "inherit",
